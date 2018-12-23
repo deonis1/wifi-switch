@@ -1,0 +1,103 @@
+HTTP/1.1 200 OK
+
+
+<!DOCTYPE html>
+    <html>
+    <head><meta charset="ISO-8859-1">
+    <script  type="text/javascript">
+    function microAjax(e){function r(){}e.method||(e.method="POST"),e.success||(e.success=r),e.warning||(e.warning=r),e.error||(e.error=r);var n=new XMLHttpRequest;n.open(e.method,e.url,!0),n.send(e.data),n.onload=function(){4===n.readyState&&200===n.status?e.success(n.responseText):e.warning()},n.onerror=e.error}
+    </script>
+    <title>Pump Control</title>
+    <style>
+        html, body {font-size: 35px;}
+       .selector {
+       background: #E5E4E2;
+       width: 250px;
+       padding: 0px 0px 0px 7px;
+       font-size: 35px;
+       border: 1;
+       border-radius: 8px;
+       border-color: #CCCCCC;
+       height: 50px;
+   }
+    </style>
+    </head>
+    <center>
+    <form>
+    <div style="padding-top:50px">
+        <table>
+        <tr>
+        <td>
+        </td>
+        <td>
+        <table>
+        <tr>
+        <td>
+            <div style="margin:40px" align="left">
+            <input  class = "selector" id = "timer" name="timer" type="time" value="07:00">
+            <label for="timer" style="cursor:text;">Set time</label>
+            </div>
+        </td>
+        </tr>
+        <tr>
+        <td>
+            <div style="margin:40px" align="left">
+            <select class = "selector" id = "duration" name="timer">
+            <option value="5">5 seconds</option>
+            <option value="8">8 seconds</option>
+            <option value="18">18 seconds</option>
+            <option value="30">30 seconds</option>
+            <option value="60">1 minute</option>
+            <option value="120">2 minute</option>
+            <option value="300">5 minute</option>
+            <option value="3600">1 hour</option>
+            <option value="7200">2 hour</option>
+            <option value="10800">3 hour</option>
+            <option value="21600">6 hour</option>
+            <option value="36000">10 hour</option>
+            <option value="43200">12 hour</option>
+            </select>
+            <label for="timer" style="cursor:text;">Set duration of watering</label>
+            </div>
+        </td>
+        </tr>
+            <!--<tr><td>  <div style="margin:50px" align="center">  <input class = "selector" id="duty" value="" type="text">Output: </div> </td></tr>-->
+            <tr><td>
+                <div style="margin:40px" align="center">
+                <input class = "selector" id="submitbtn" value="Submit" type="button" onclick="adjon()">
+                <input class = "selector" id="off" value="OFF" type="button" onclick='adjoff()'>
+                </div>
+            </td></tr>
+        </table>
+       <div>
+       <script>
+       function adj(data) {
+               datastr = JSON.stringify(data);
+               microAjax({
+                  url: datastr,
+                  method: "POST",
+                  data: datastr
+                });
+            }
+       function adjon() {
+            var et = document.getElementById("timer");
+            var valuet = et.value;
+            var ed = document.getElementById("duration");
+            var valued = ed.options[ed.selectedIndex].value;
+            console.log(valuet, valued);
+            data = ["POSTED", "timer", valuet, "duration", valued];
+            adj(data);
+                        }
+       function adjoff() {
+               data = ["POSTED", "timer", 0, "duration", 0];
+               adj(data);
+               }
+       </script>
+    </div>
+    </td>
+    </tr>
+    </table>
+    </div>
+    </form>
+    </center>
+    </html>
