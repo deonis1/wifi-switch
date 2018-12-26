@@ -1,6 +1,6 @@
-from wifi_switch import HttServ
+from wifi_switch import wifi_switch
 try:
-    HttServ()
+    wifi_switch()
 except OSError:
     import machine
     machine.reset()
