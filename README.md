@@ -5,7 +5,7 @@ The code is based on micropython 1.9.4 and depends on ujson, ntptime, and other 
 
 Usage:
 
-1) Set the board IP, port and your time difference from UTC. Is you use ESP32 and set your IP manually this IP should be the same as the one defined in your network config.
+1) Set the board IP, port and your time difference from UTC. If you use ESP32 and you set your IP manually this IP should be the same as the one defined in your network configuration.
 
 2) Upload .py and .html files to your esp MicroPython-enabled board and restart the board.
 
